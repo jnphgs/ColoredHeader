@@ -21,6 +21,8 @@ A Unity package for color-coding objects in the Hierarchy view and organizing th
 
 ## Usage
 
+![usage](./Docs/usage.jpg)
+
 ### 1. Changing Object Colors
 
 1. Select the GameObject you want to color.
@@ -34,6 +36,17 @@ A Unity package for color-coding objects in the Hierarchy view and organizing th
 1. Create a GameObject to be used as a divider.
 2. Prefix the object name with `#` (e.g., `# SYSTEM`).
 3. The object's text will appear centered in the Hierarchy.
+
+![settings](./Docs/settings.jpg)
+
+### 3. Project Settings
+
+You can configure the package settings via `Project Settings > Colored Header`.
+
+- **Auto Static**: Toggles whether to automatically set GameObjects to Static when the `ColorInHierarchy` component is attached.
+- **Categories**: Manage and add categories that can be used with `ColorInHierarchy`.
+  - **Add Category**: Click the "Add Category" button to add a new category and set its name and color freely.
+  - **Remove Category**: Click the "Remove" button to delete a category.
 
 ## License
 
