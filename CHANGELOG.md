@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.1] - 2026-03-27
+
+### Bug Fixes
+- resolve `HierarchyColorDrawer` compilation error and warning (`CS0117`, `CS0618`) in Unity 6 (`6000.0.58f2`)
+
+
 ## [1.2.0] - 2026-03-27
 
 ### Documentation
