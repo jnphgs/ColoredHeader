@@ -13,8 +13,7 @@ namespace ColoredHeader.Editor
 
         private static void OnHierarchyChanged()
         {
-            var settings = ColoredHeaderSettings.Instance;
-            if (settings == null || !settings.AutoStatic) return;
+            if (!ColoredHeaderSettings.AutoStatic) return;
 
             // Simple check: iterate over selected or all root objects?
             // To be efficient, we might only check objects that were just changed, 
