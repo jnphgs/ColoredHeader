@@ -22,24 +22,34 @@ namespace ColoredHeader.Editor
 
         private static void DrawSettingsGUI(string searchContext)
         {
+            var settings = ColoredHeaderSettings.Instance;
+            if (settings == null)
+            {
+                EditorGUILayout.HelpBox("Could not load ColoredHeaderSettings.", MessageType.Error);
+                return;
+            }
+
+            EditorGUI.BeginChangeCheck();
+
             EditorGUILayout.LabelField("Colored Header Settings", EditorStyles.boldLabel);
             EditorGUILayout.Space();
 
             // AutoStatic
-            ColoredHeaderSettings.AutoStatic = EditorGUILayout.Toggle("Auto Static", ColoredHeaderSettings.AutoStatic);
+            settings.AutoStatic = EditorGUILayout.Toggle("Auto Static", settings.AutoStatic);
 
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Categories", EditorStyles.boldLabel);
 
-            var categories = ColoredHeaderSettings.Categories;
+            var categories = settings.Categories;
             for (int i = 0; i < categories.Count; i++)
             {
                 EditorGUILayout.BeginHorizontal();
-                categories[i] = new ColoredHeaderSettings.CategoryInfo
-                {
-                    Name = EditorGUILayout.TextField(categories[i].Name),
-                    Color = EditorGUILayout.ColorField(categories[i].Color)
-                };
+                
+                var category = categories[i];
+                category.Name = EditorGUILayout.TextField(category.Name);
+                category.Color = EditorGUILayout.ColorField(category.Color);
+                categories[i] = category;
+
                 if (GUILayout.Button("Remove", GUILayout.Width(60)))
                 {
                     categories.RemoveAt(i);
@@ -53,10 +63,9 @@ namespace ColoredHeader.Editor
                 categories.Add(new ColoredHeaderSettings.CategoryInfo { Name = "New Category", Color = Color.white });
             }
 
-            // Save changes
-            if (GUI.changed)
+            if (EditorGUI.EndChangeCheck())
             {
-                ColoredHeaderSettings.Categories = categories;
+                settings.Save();
             }
         }
     }

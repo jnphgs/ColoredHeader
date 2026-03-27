@@ -427,8 +427,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f2a723bbe5e74390b35eb8d874d2bbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ColoredHeader.Runtime::ColoredHeader.Runtime.ColorInHierarchy
-  CategoryName: 
-  Color: {r: 1, g: 1, b: 1, a: 1}
+  CategoryName: Custom
+  Color: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0

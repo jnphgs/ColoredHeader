@@ -10,7 +10,8 @@ namespace ColoredHeader.Editor
         public override void OnInspectorGUI()
         {
             var script = (ColorInHierarchy)target;
-            var categories = ColoredHeaderSettings.Categories;
+            var settings = ColoredHeaderSettings.Instance;
+            var categories = settings != null ? settings.Categories : null;
 
             serializedObject.Update();
 

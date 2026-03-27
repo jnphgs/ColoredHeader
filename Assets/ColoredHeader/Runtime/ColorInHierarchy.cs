@@ -13,14 +13,17 @@ namespace ColoredHeader.Runtime
         private void OnValidate()
         {
 #if UNITY_EDITOR
-            if (ColoredHeaderSettings.AutoStatic)
+            var settings = ColoredHeaderSettings.Instance;
+            if (settings == null) return;
+
+            if (settings.AutoStatic)
             {
                 gameObject.isStatic = true;
             }
 
             if (string.IsNullOrEmpty(CategoryName)) return;
 
-            var category = ColoredHeaderSettings.Categories.FirstOrDefault(c => c.Name == CategoryName);
+            var category = settings.Categories.FirstOrDefault(c => c.Name == CategoryName);
             if (!string.IsNullOrEmpty(category.Name))
             {
                 Color = category.Color;
