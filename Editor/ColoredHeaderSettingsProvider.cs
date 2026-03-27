@@ -35,19 +35,19 @@ namespace ColoredHeader.Editor
             EditorGUILayout.Space();
 
             // AutoStatic
-            settings.AutoStatic = EditorGUILayout.Toggle("Auto Static", settings.AutoStatic);
+            settings.autoStatic = EditorGUILayout.Toggle("Auto Static", settings.autoStatic);
 
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Categories", EditorStyles.boldLabel);
 
-            var categories = settings.Categories;
+            var categories = settings.categories;
             for (int i = 0; i < categories.Count; i++)
             {
                 EditorGUILayout.BeginHorizontal();
                 
                 var category = categories[i];
-                category.Name = EditorGUILayout.TextField(category.Name);
-                category.Color = EditorGUILayout.ColorField(category.Color);
+                category.name = EditorGUILayout.TextField(category.name);
+                category.color = EditorGUILayout.ColorField(category.color);
                 categories[i] = category;
 
                 if (GUILayout.Button("Remove", GUILayout.Width(60)))
@@ -60,7 +60,7 @@ namespace ColoredHeader.Editor
 
             if (GUILayout.Button("Add Category"))
             {
-                categories.Add(new ColoredHeaderSettings.CategoryInfo { Name = "New Category", Color = Color.white });
+                categories.Add(new ColoredHeaderSettings.CategoryInfo { name = "New Category", color = Color.white });
             }
 
             if (EditorGUI.EndChangeCheck())

@@ -11,22 +11,22 @@ namespace ColoredHeader.Editor
         {
             var script = (ColorInHierarchy)target;
             var settings = ColoredHeaderSettings.Instance;
-            var categories = settings != null ? settings.Categories : null;
+            var categories = settings?.categories;
 
             serializedObject.Update();
 
             if (categories != null && categories.Count > 0)
             {
-                var names = categories.Select(c => c.Name).ToList();
+                var names = categories.Select(c => c.name).ToList();
                 names.Insert(0, "None");
 
-                int currentIndex = names.IndexOf(script.CategoryName);
+                int currentIndex = names.IndexOf(script.categoryName);
                 if (currentIndex < 0) currentIndex = 0;
 
                 int newIndex = EditorGUILayout.Popup("Category", currentIndex, names.ToArray());
                 if (newIndex != currentIndex)
                 {
-                    script.CategoryName = newIndex == 0 ? "" : names[newIndex];
+                    script.categoryName = newIndex == 0 ? "" : names[newIndex];
                     EditorUtility.SetDirty(script);
                     // Force OnValidate to update the color
                     var onValidate = script.GetType().GetMethod("OnValidate", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
@@ -39,7 +39,7 @@ namespace ColoredHeader.Editor
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("CategoryName"));
             }
 
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("Color"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("color"));
 
             serializedObject.ApplyModifiedProperties();
         }

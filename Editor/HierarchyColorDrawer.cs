@@ -7,8 +7,6 @@ namespace ColoredHeader.Editor
     [InitializeOnLoad]
     public static class HierarchyColorDrawer
     {
-        private static readonly Color DefaultBackgroundColor = new Color(0.19f, 0.19f, 0.19f);
-
         static HierarchyColorDrawer()
         {
             EditorApplication.hierarchyWindowItemOnGUI += OnHierarchyGUI;
@@ -34,11 +32,11 @@ namespace ColoredHeader.Editor
             if (obj.name.StartsWith("#"))
             {
                 // Background color
-                var backColor = colorComp != null ? colorComp.Color : (EditorGUIUtility.isProSkin 
+                var backColor = colorComp != null ? colorComp.color : (EditorGUIUtility.isProSkin 
                     ? new Color(0.22f, 0.22f, 0.22f, 1f) 
                     : new Color(0.7f, 0.7f, 0.7f, 1f));
                 
-                // Draw background only for label area
+                // Draw background only for the label area
                 EditorGUI.DrawRect(labelRect, backColor);
 
                 // Determine text color based on background brightness
@@ -57,13 +55,13 @@ namespace ColoredHeader.Editor
             }
 
             // --- ColorInHierarchy ---
-            if (colorComp != null)
+            if (colorComp)
             {
                 // Draw custom background color
-                EditorGUI.DrawRect(labelRect, colorComp.Color);
+                EditorGUI.DrawRect(labelRect, colorComp.color);
 
                 // Determine text color based on background brightness
-                var luminance = 0.2126f * colorComp.Color.r + 0.7152f * colorComp.Color.g + 0.0722f * colorComp.Color.b;
+                var luminance = 0.2126f * colorComp.color.r + 0.7152f * colorComp.color.g + 0.0722f * colorComp.color.b;
                 var textColor = luminance > 0.5f ? Color.black : Color.white;
 
                 var style = new GUIStyle(EditorStyles.label)

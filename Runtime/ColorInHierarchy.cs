@@ -1,13 +1,14 @@
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace ColoredHeader.Runtime
 {
     [DisallowMultipleComponent]
     public class ColorInHierarchy : MonoBehaviour
     {
-        public string CategoryName;
-        public Color Color = Color.white;
+        public string categoryName;
+        public Color color = Color.white;
 
 
         private void OnValidate()
@@ -16,17 +17,17 @@ namespace ColoredHeader.Runtime
             var settings = ColoredHeaderSettings.Instance;
             if (settings == null) return;
 
-            if (settings.AutoStatic)
+            if (settings.autoStatic)
             {
                 gameObject.isStatic = true;
             }
 
-            if (string.IsNullOrEmpty(CategoryName)) return;
+            if (string.IsNullOrEmpty(categoryName)) return;
 
-            var category = settings.Categories.FirstOrDefault(c => c.Name == CategoryName);
-            if (!string.IsNullOrEmpty(category.Name))
+            var category = settings.categories.FirstOrDefault(c => c.name == categoryName);
+            if (category != null && !string.IsNullOrEmpty(category.name))
             {
-                Color = category.Color;
+                color = category.color;
             }
 #endif
         }
