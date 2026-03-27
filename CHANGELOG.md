@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0] - 2026-03-27
+
+### Documentation
+- Added images to `Readme.md` for better visual guidance and updated descriptions in English.
+
+### Style
+- Formatted code and renamed fields for consistency across the package.
+
 ## [1.1.0] - 2026-03-27
 
 ### Features
