@@ -1,0 +1,15 @@
+{
+  "name": "com.jnphgs.coloredheader",
+  "version": "1.2.0",
+  "displayName": "Colored Header",
+  "description": "A Unity package for color-coding objects in the Hierarchy view and organizing them as visually distinct headers.",
+  "unity": "6000.0",
+  "author": {
+    "name": "jnphgs"
+  },
+  "keywords": [
+    "unity",
+    "hierarchy",
+    "editor"
+  ]
+}

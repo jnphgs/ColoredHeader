@@ -1,0 +1,26 @@
+name: Create UPM branches
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get tag name
+        id: tag
+        run: echo "name=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+      - name: Create UPM branch
+        uses: hecomi/create-upm-branch-action@main
+        with:
+          git-tag: ${{steps.tag.outputs.name}}
+          pkg-root-dir-path: Assets/ColoredHeader
+          main-branch: main
