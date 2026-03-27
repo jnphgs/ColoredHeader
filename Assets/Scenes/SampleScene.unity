@@ -427,8 +427,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f2a723bbe5e74390b35eb8d874d2bbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ColoredHeader.Runtime::ColoredHeader.Runtime.ColorInHierarchy
-  CategoryName: Custom
-  Color: {r: 1, g: 0, b: 0, a: 1}
+  categoryName: Timeline
+  color: {r: 0.36, g: 0.18, b: 0.57, a: 1}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -507,8 +507,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f2a723bbe5e74390b35eb8d874d2bbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ColoredHeader.Runtime::ColoredHeader.Runtime.ColorInHierarchy
-  CategoryName: UI
-  Color: {r: 0, g: 0.47, b: 0.83, a: 1}
+  categoryName: UI
+  color: {r: 0, g: 0.47, b: 0.83, a: 1}
 --- !u!4 &1409150566
 Transform:
   m_ObjectHideFlags: 0
