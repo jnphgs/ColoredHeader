@@ -16,7 +16,7 @@ A Unity package for color-coding objects in the Hierarchy view and organizing th
 2. Click the `+` button and select `Add package from git URL...`.
 3. Enter the following URL and click `Add`:
    ```
-   https://github.com/USERNAME/ColoredHeader.git#upm
+   https://github.com/jnphgs/ColoredHeader.git#upm
    ```
 
 ## Usage
