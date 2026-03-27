@@ -10,13 +10,13 @@ namespace ColoredHeader.Editor
         public override void OnInspectorGUI()
         {
             var script = (ColorInHierarchy)target;
-            var settings = ColoredHeaderSettings.Instance;
+            var categories = ColoredHeaderSettings.Categories;
 
             serializedObject.Update();
 
-            if (settings != null && settings.Categories.Count > 0)
+            if (categories != null && categories.Count > 0)
             {
-                var names = settings.Categories.Select(c => c.Name).ToList();
+                var names = categories.Select(c => c.Name).ToList();
                 names.Insert(0, "None");
 
                 int currentIndex = names.IndexOf(script.CategoryName);
