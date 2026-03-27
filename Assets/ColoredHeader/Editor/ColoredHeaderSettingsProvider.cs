@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.IO;
 using UnityEditor;
 using UnityEngine;
 using ColoredHeader.Runtime;
@@ -8,50 +7,57 @@ namespace ColoredHeader.Editor
 {
     public static class ColoredHeaderSettingsProvider
     {
-        private const string SettingsPath = "Assets/ColoredHeader/Resources/ColoredHeaderSettings.asset";
-
         [SettingsProvider]
         public static SettingsProvider CreateSettingsProvider()
         {
             var provider = new SettingsProvider("Project/Colored Header", SettingsScope.Project)
             {
                 label = "Colored Header",
-                guiHandler = (searchContext) =>
-                {
-                    var settings = GetOrCreateSettings();
-                    var editor = UnityEditor.Editor.CreateEditor(settings);
-                    editor.OnInspectorGUI();
-                },
+                guiHandler = DrawSettingsGUI,
                 keywords = new HashSet<string>(new[] { "Colored", "Header", "Hierarchy", "Color" })
             };
 
             return provider;
         }
 
-        private static ColoredHeaderSettings GetOrCreateSettings()
+        private static void DrawSettingsGUI(string searchContext)
         {
-            var settings = Resources.Load<ColoredHeaderSettings>("ColoredHeaderSettings");
-            if (settings != null) return settings;
+            EditorGUILayout.LabelField("Colored Header Settings", EditorStyles.boldLabel);
+            EditorGUILayout.Space();
 
-            // Search for existing settings
-            var assets = AssetDatabase.FindAssets("t:ColoredHeaderSettings");
-            if (assets.Length > 0)
+            // AutoStatic
+            ColoredHeaderSettings.AutoStatic = EditorGUILayout.Toggle("Auto Static", ColoredHeaderSettings.AutoStatic);
+
+            EditorGUILayout.Space();
+            EditorGUILayout.LabelField("Categories", EditorStyles.boldLabel);
+
+            var categories = ColoredHeaderSettings.Categories;
+            for (int i = 0; i < categories.Count; i++)
             {
-                var path = AssetDatabase.GUIDToAssetPath(assets[0]);
-                return AssetDatabase.LoadAssetAtPath<ColoredHeaderSettings>(path);
+                EditorGUILayout.BeginHorizontal();
+                categories[i] = new ColoredHeaderSettings.CategoryInfo
+                {
+                    Name = EditorGUILayout.TextField(categories[i].Name),
+                    Color = EditorGUILayout.ColorField(categories[i].Color)
+                };
+                if (GUILayout.Button("Remove", GUILayout.Width(60)))
+                {
+                    categories.RemoveAt(i);
+                    i--;
+                }
+                EditorGUILayout.EndHorizontal();
             }
 
-            // Create new settings if not found
-            var directory = Path.GetDirectoryName(SettingsPath);
-            if (!Directory.Exists(directory))
+            if (GUILayout.Button("Add Category"))
             {
-                Directory.CreateDirectory(directory);
+                categories.Add(new ColoredHeaderSettings.CategoryInfo { Name = "New Category", Color = Color.white });
             }
 
-            settings = ScriptableObject.CreateInstance<ColoredHeaderSettings>();
-            AssetDatabase.CreateAsset(settings, SettingsPath);
-            AssetDatabase.SaveAssets();
-            return settings;
+            // Save changes
+            if (GUI.changed)
+            {
+                ColoredHeaderSettings.Categories = categories;
+            }
         }
     }
 }
