@@ -14,11 +14,11 @@ namespace ColoredHeader.Editor
 
         private static void OnHierarchyGUI(int instanceID, Rect selectionRect)
         {
-#if UNITY_2023_1_OR_NEWER
-            var obj = EditorUtility.EntityIdToObject(instanceID) as GameObject;
-#else
+            // TODO: Change to use EditorUtility.EntityIdToObject if Unity LTS fully migrates to it.
+            // var obj = EditorUtility.EntityIdToObject(instanceID) as GameObject;
+#pragma warning disable CS0618
             var obj = EditorUtility.InstanceIDToObject(instanceID) as GameObject;
-#endif
+#pragma warning restore CS0618
             if (obj == null) return;
 
             // Offset for the default icon (usually 16x16)
