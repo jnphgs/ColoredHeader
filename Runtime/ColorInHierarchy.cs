@@ -12,21 +12,20 @@ namespace ColoredHeader.Runtime
 
         private void OnValidate()
         {
-            if (ColoredHeaderSettings.Instance != null && ColoredHeaderSettings.Instance.AutoStatic)
+#if UNITY_EDITOR
+            if (ColoredHeaderSettings.AutoStatic)
             {
                 gameObject.isStatic = true;
             }
 
-            var settings = ColoredHeaderSettings.Instance;
-            if (settings == null) return;
-
             if (string.IsNullOrEmpty(CategoryName)) return;
 
-            var category = settings.Categories.FirstOrDefault(c => c.Name == CategoryName);
+            var category = ColoredHeaderSettings.Categories.FirstOrDefault(c => c.Name == CategoryName);
             if (!string.IsNullOrEmpty(category.Name))
             {
                 Color = category.Color;
             }
+#endif
         }
     }
 }
