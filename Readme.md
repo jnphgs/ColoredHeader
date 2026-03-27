@@ -2,6 +2,9 @@
 
 A Unity package for color-coding objects in the Hierarchy view and organizing them as visually distinct headers.
 
+![usage](./Docs/usage.jpg)
+
+
 ## Features
 
 - **ColorInHierarchy**: Adds a serializable color property to each GameObject, allowing individual customization of label colors in the Hierarchy.
@@ -20,8 +23,6 @@ A Unity package for color-coding objects in the Hierarchy view and organizing th
    ```
 
 ## Usage
-
-![usage](./Docs/usage.jpg)
 
 ### 1. Changing Object Colors
 
